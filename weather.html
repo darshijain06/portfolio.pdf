@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 60px; background: #e8f4fd; }
+    input, button { padding: 10px; font-size: 16px; }
+    #result { margin-top: 30px; font-size: 22px; }
+  </style>
+</head>
+<body>
+  <h1>Weather App</h1>
+  <input id="city" placeholder="City ka naam" onkeydown="if(event.key ==='Enter') getWeather()">
+  <button onclick="getWeather()">Search</button>
+  <div id="result"></div>
+
+  <script>
+    const key = "b00f6bdb8f470d21ffd19b0d126b1e44";
+
+    function getWeather() {
+      const city = document.getElementById("city").value;
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`)
+        .then(r => r.json())
+        .then(d => {
+          if (d.cod != 200) {
+            document.getElementById("result").innerText = "City nahi mili";
+            return;
+          }
+          document.getElementById("result").innerHTML =
+            `<b>${d.name}</b><br>${d.main.temp}°C<br>${d.weather[0].description}<br>Humidity: ${d.main.humidity}%<br>Wind: ${d.wind.speed} m/s`;
+        });
+    }
+  </script>
+</body>
+</html>

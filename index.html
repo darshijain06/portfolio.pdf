@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Darshi Jain | BTech CSE Student</title>
+    <meta
+      name="description"
+      content="Personal profile of Darshi Jain, a BTech CSE Student."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <p class="brand">Darshi Jain</p>
+        <nav class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+          </ul>
+        </nav>
+        <button type="button" class="theme-toggle" aria-pressed="false">
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <p class="eyebrow" id="greeting">Hello</p>
+        <h1>Darshi Jain</h1>
+        <p class="lede">
+          BTech CSE Student interested in programming and web development.
+        </p>
+      </section>
+
+      <section id="about" aria-labelledby="about-heading">
+        <h2 id="about-heading">About</h2>
+        <p>
+          I am a BTech Computer Science student interested in programming and web development. I enjoy building small projects and learning new technologies.
+        </p>
+        <p>
+          Contact:
+          <a href="https://github.com/PLACEHOLDER-github" rel="noopener noreferrer"
+            >GitHub</a
+          >
+        </p>
+      </section>
+
+      <section id="skills" aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Skills</h2>
+        <ul class="skills-list">
+          <li>Python</li>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ul>
+      </section>
+
+      <section id="projects" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
+        <ul class="projects-list">
+          <li>
+            <h3>
+              <a
+                href="https://PLACEHOLDER-project-one.example.com"
+                rel="noopener noreferrer"
+                >Interactive Quiz App</a
+              >
+            </h3>
+            <p>
+              A quiz app built with HTML, CSS and JavaScript that shows questions and displays the final score.
+            </p>
+          </li>
+          <li>
+            <h3>
+              <a
+                href="https://github.com/PLACEHOLDER-github/PLACEHOLDER-project-two"
+                rel="noopener noreferrer"
+                >Reading List App</a
+              >
+            </h3>
+            <p>
+              A web app to add books, change their reading status, filter and delete them.
+            </p>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        © <span id="year"></span> Darshi Jain. Built with HTML, CSS,
+        and JavaScript.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+    <section id="weather">
+      <h2>Weather Forecast</h2>
+      <p>Check the current weather in your city.</p>
+      <input id="weather-city" placeholder="Enter city" onkeydown="if(event.key==='Enter') showWeather()">
+      <button onclick="showWeather()">Get Weather</button>
+      <div id="weather-result">Enter a city to check its weather.</div>
+    </section>
+    
+    <script>
+      const weatherKey = "b00f6bdb8f470d21ffd19b0d126b1e44";
+    
+      function showWeather() {
+        const city = document.getElementById("weather-city").value;
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherKey}`)
+          .then(r => r.json())
+          .then(d => {
+            const out = document.getElementById("weather-result");
+            if (d.cod != 200) { out.innerText = "City not found"; return; }
+            out.innerHTML = `<b>${d.name}</b><br>${d.main.temp}°C, ${d.weather[0].description}<br>Humidity: ${d.main.humidity}% | Wind: ${d.wind.speed} m/s`;
+          });
+      }
+    </script>
+  </body>
+</html>
